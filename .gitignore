@@ -1,0 +1,10 @@
+# Duplicate archive, local editor settings, Python caches, and credentials.
+lwf.zip
+.claude/settings.local.json
+**/__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+*.pem
+*.key

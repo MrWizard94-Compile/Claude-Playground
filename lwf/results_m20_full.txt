@@ -1,0 +1,15 @@
+
+=== M20: crux via rank-bottlenecked Workspace (sorting N=24, device=cuda, steps=3000) ===
+per-slot accuracy (chance=1/32=0.031); dh = Workspace rank (values to hold = N=24)
+
+ dh (rank) |    attn |  bounded |  hybrid
+-----------------------------------------
+        24 |   1.000 |    0.969 |   0.975
+         8 |   1.000 |    0.966 |   0.981
+         4 |   1.000 |    0.961 |   0.976
+         2 |   1.000 |    0.951 |   0.969
+
+--- PRE-REGISTERED VERDICT (fixed before run) ---
+  no swept dh bottlenecked bounded while attn worked -> INCONCLUSIVE
+  M20 VERDICT: INCONCLUSIVE (could not create the failure regime)
+[wall 2789s]

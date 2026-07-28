@@ -1,0 +1,15 @@
+
+=== M6: learned MQAR crux probe (d_head=32, steps=600, batch=32, seeds=1) ===
+query-position accuracy (chance = 1/VP = 0.016); D = #key-value pairs (state pressure)
+
+ D pairs |   linear    delta     attn   hybrid
+----------------------------------------------
+       8 |    0.969    0.995    1.000    1.000
+      16 |    0.908    0.988    1.000    1.000
+      24 |    0.812    0.990    1.000    1.000
+      32 |    0.722    0.990    1.000    1.000
+      40 |    0.656    0.979    1.000    1.000
+
+At D=40: best bounded=0.656, best retrieval=1.000
+M6 (retrieval recovers recall that bounded state loses, learned): SUPPORTED
+[DIRECTIONAL: toy scale, single layer, CPU -- not a frontier-model claim]

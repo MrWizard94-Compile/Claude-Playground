@@ -1,0 +1,15 @@
+
+=== M15: integrated LWF, end-to-end learned (device=cuda, n_vars=32, U=8, L=120, d=48, steps=3500) ===
+chance: QUERY=1/8=0.125, COMPARE=1/3=0.333
+
+   transformer:  QUERY=0.299   COMPARE=0.443
+       bounded:  QUERY=0.312   COMPARE=0.439
+        oracle:  QUERY=1.000   COMPARE=1.000
+           lwf:  QUERY=0.716   COMPARE=0.697
+
+--- PRE-REGISTERED VERDICT (thresholds fixed before run) ---
+  config validity (bounded_COMPARE <= 0.60): 0.439 -> True
+  PRIMARY  L>=0.9*T on COMPARE: 0.697 >= 0.399 -> True
+  SECONDARY L>=0.9*Oracle     : 0.697 >= 0.900 -> False
+  M15 VERDICT: FAIL/PARTIAL (honest negative)
+  [integration works: LWF QUERY 0.716 vs bounded 0.312 vs transformer 0.299]

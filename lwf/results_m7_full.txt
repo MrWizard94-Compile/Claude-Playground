@@ -1,0 +1,16 @@
+
+=== M7: bounded-cost crux (device=cpu, layers=1, d_head=32, top-k=8, steps=500, seeds=2) ===
+query accuracy mean+/-std (chance=0.016); reads/step in [brackets]
+
+   D |           linear             attn      hybrid_topk
+---------------------------------------------------------
+   8 | 0.974+/-0.003[1] 1.000+/-0.000[24] 1.000+/-0.000[8]
+  24 | 0.881+/-0.003[1] 1.000+/-0.000[72] 1.000+/-0.000[8]
+  48 | 0.641+/-0.003[1] 1.000+/-0.000[144] 1.000+/-0.000[8]
+  64 | 0.541+/-0.026[1] 1.000+/-0.000[192] 1.000+/-0.000[8]
+
+At D=64: linear(bounded)=0.541, hybrid_topk=1.000 [reads/step=8], attn=1.000 [reads/step=192]
+M7 (bounded top-k retrieval recovers recall at reads/step << context): SUPPORTED
+[DIRECTIONAL: still toy scale; auto-scales on GPU]
+
+[wall time: 850.4s]

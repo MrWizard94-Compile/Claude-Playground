@@ -1,0 +1,15 @@
+
+=== M18: full fast-weight stack vs working baseline (MQAR, device=cuda, D=48 pairs, steps=2500) ===
+query accuracy (chance=1/64=0.016); reads/step in [brackets]
+
+      attn: acc=1.000  [96 reads/step]
+    linear: acc=0.994  [1 reads/step]
+        fw: acc=0.883  [1 reads/step]
+    fw+ldg: acc=1.000  [8 reads/step]
+
+--- PRE-REGISTERED VERDICT (fixed before run) ---
+  config valid (attn>=0.90 & fw-bounded<=0.70): attn=1.000, fw=0.883 -> False
+  PRIMARY fw+ldg >= 0.9*attn: 1.000 >= 0.900 [8 reads vs attn 96] -> True
+  M18 VERDICT: FAIL/PARTIAL (honest negative)
+  [full fast-weight Workspace + top-k Ledger vs a transformer baseline that ACTUALLY works.]
+[wall 1983s]

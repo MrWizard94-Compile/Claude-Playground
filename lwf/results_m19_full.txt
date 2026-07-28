@@ -1,0 +1,15 @@
+
+=== M19: irreducibly-global reasoning (in-context SORTING, device=cuda, alphabet=32, steps=3000) ===
+per-slot accuracy on the sorted output (chance=1/32=0.031)
+
+ N (width) |    attn |  bounded |  hybrid
+-----------------------------------------
+         8 |   1.000 |    0.952 |   1.000
+        16 |   1.000 |    0.963 |   0.999
+
+--- PRE-REGISTERED VERDICT (fixed before run) ---
+  config valid (attn>=0.85 & bounded<=0.60) @N=16: attn=1.000, bounded=0.963 -> False
+  hybrid=0.999 vs 0.85*attn=0.850, bounded=0.963
+  M19 VERDICT: INCONCLUSIVE (config invalid -- baseline didn't work or bounded didn't fail)
+  [Two-sided test: LWF can FAIL here, and that would be the most informative outcome.]
+[wall 793s]

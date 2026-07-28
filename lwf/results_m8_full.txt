@@ -1,0 +1,15 @@
+
+=== M8: in-context multi-hop (device=cuda, layers=5, D=20 nodes/graph, n_nodes=128, top-k=8, steps=2000, seeds=2) ===
+final-position accuracy mean+/-std (chance=0.008); [reads/step]
+
+  H |           linear             attn      hybrid_topk
+--------------------------------------------------------
+  1 | 0.699+/-0.002[5] 0.642+/-0.015[205] 0.671+/-0.032[40]
+  2 | 0.167+/-0.005[5] 0.346+/-0.014[205] 0.344+/-0.006[40]
+  3 | 0.141+/-0.004[5] 0.161+/-0.003[205] 0.180+/-0.006[40]
+
+At H=3: linear=0.141, hybrid_topk=0.180 [reads/step=40], attn=0.161 [reads/step=205]
+M8: CHECK (no clear separation -- likely undertrained or task mis-scaled)
+[DIRECTIONAL: toy-to-small scale, 1660 Ti]
+
+[wall time: 4164.8s]

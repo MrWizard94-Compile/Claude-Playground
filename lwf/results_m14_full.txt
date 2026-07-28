@@ -1,0 +1,19 @@
+
+=== M14: knowledge scales in the Ledger, not the model (device=cuda, D=64, V=100, noise=0.15) ===
+accuracy (chance=0.010); parametric MLP has FIXED capacity, retrieval uses a host-RAM Ledger
+
+   N facts | ledger RAM |  parametric |  retrieval |  ret ms/q | MLP params
+---------------------------------------------------------------------------
+      1000 |        1MB |       0.864 |      0.997 |     0.012 |     108132
+     10000 |        5MB |       0.112 |      0.991 |     0.003 |     108132
+    100000 |       51MB |       0.009 |      0.951 |     0.023 |     108132
+   1000000 |      512MB | (untrained) |      0.880 |     0.085 |         --
+   5000000 |     2560MB | (untrained) |      0.786 |     0.556 |         --
+
+parametric: N=1000 -> 0.864, N=100000 -> 0.009  (fixed 108132-param model: COLLAPSES to ~chance)
+retrieval : N=100000 -> 0.951 (head-to-head), N=5000000 -> 0.786 (graceful scaling on host RAM)
+head-to-head gap @ N=100000: retrieval 0.951 - parametric 0.009 = 0.943
+M14 (knowledge scales in the Ledger, not the model): SUPPORTED
+[The nonparametric-knowledge bet behind M9, now empirical & learned: a fixed-size model cannot
+ memorise growing N, but a small model + host-RAM Ledger does, at constant per-query model cost.]
+[wall time: 33.3s]
