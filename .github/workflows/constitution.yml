@@ -1,0 +1,41 @@
+name: Pinned Constitution adoption and source hygiene
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  adoption:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out Claude-Playground
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: project
+          persist-credentials: false
+
+      - name: Check out accepted WPAI Constitution
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: MrWizard94-Compile/Agents-Constitution
+          ref: ded36646c11d61bcfa7e2420b81a278dc98f47e6
+          path: constitution
+          persist-credentials: false
+
+      - name: Validate canonical source and tests
+        working-directory: constitution
+        run: |
+          python3 tools/validate-source.py
+          python3 -m unittest discover -s tests -v
+
+      - name: Check project adoption
+        run: python3 constitution/tools/check-adoption.py project
+
+      - name: Check LWF Python syntax without running experiments
+        working-directory: project
+        run: python3 -W error -m compileall -q lwf
